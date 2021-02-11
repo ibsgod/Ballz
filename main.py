@@ -26,14 +26,17 @@ drags = [False] * len(Info.balls)
 screen.fill((255, 255, 255))
 
 while True:
-    mousePos = pygame.mouse.get_pos()
     screen.fill((255, 255, 255))
+    screen.blit(pygame.font.SysFont("Comic Sans", 30).render("Press g to toggle gravity", 1, (0, 0, 0)), (0, 0))
+    mousePos = pygame.mouse.get_pos()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit()
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_SPACE:
-                pass
+            if event.key == pygame.K_g:
+                Info.gravity = 9.8 if Info.gravity == 0 else 0
+                for i in Info.balls:
+                    i.yvel = 0
         if event.type == pygame.MOUSEBUTTONDOWN:
             click = True
             for i in range(len(drags)):

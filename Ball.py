@@ -19,6 +19,8 @@ class Ball:
         self.lastColl = []
         self.mass = math.pi * self.size**2
         Info.balls.append(self)
+        self.wood = pygame.mixer.Sound("wood1.wav")
+        self.woodd = pygame.mixer.Sound("wood2.wav")
 
     def draw(self):
         pygame.draw.circle(self.screen, self.colour, (self.cx, self.cy), self.size)
@@ -37,11 +39,16 @@ class Ball:
         self.x += self.xvel
         # self.y = max(0, min(self.y, Info.ground.y - self.size * 2))
         # self.x = max(0, min(self.x, 1200 - self.size * 2))
-        if self.y < 0 or self.y + self.size*2 > 650:
-            self.yvel *= -1
         if self.x < 0 or self.x + self.size*2 > 1200:
             self.xvel *= -1
-        self.y = max(0, min(self.y, 650 - self.size * 2))
+            self.woodd.play()
+        if Info.gravity > 0:
+            self.y = min(self.y, 650 - self.size * 2)
+        else:
+            if self.y < 0 or self.y + self.size*2 > 650:
+                self.yvel *= -1
+                self.woodd.play()
+            self.y = max(0, min(self.y, 650 - self.size * 2))
         self.x = max(0, min(self.x, 1200 - self.size * 2))
         self.cx = self.x + self.size
         self.cy = self.y + self.size
@@ -51,6 +58,7 @@ class Ball:
                     self.lastColl.append(i)
                     i.lastColl.append(self)
                     self.ballColl(i)
+                    self.wood.play()
             else:
                 if self in i.lastColl:
                     i.lastColl.remove(self)

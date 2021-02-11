@@ -1,4 +1,4 @@
 class Info:
-    gravity = 0
+    gravity = 9.8
     ground = None
     balls = []
