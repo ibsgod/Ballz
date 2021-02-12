@@ -82,13 +82,9 @@ class Ball:
 
     def ballColl(self, ball):
         diff = ball.xvel - self.xvel
-        print(diff)
         leftmom = self.mass * self.xvel + ball.mass * ball.xvel
-        print(leftmom)
         leftmom -= diff * self.mass
-        print(leftmom)
         leftmom /= self.mass + ball.mass
-        print(leftmom)
         ball.xvel = leftmom
         self.xvel = leftmom + diff
         diff = ball.yvel - self.yvel
@@ -97,5 +93,4 @@ class Ball:
         leftmom /= self.mass + ball.mass
         ball.yvel = leftmom
         self.yvel = leftmom + diff
-        print(self.xvel, self.yvel, ball.xvel, ball.yvel)
 

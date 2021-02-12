@@ -1,4 +1,5 @@
 import os
+import random
 import sys
 
 import pygame
@@ -14,20 +15,17 @@ width = 1200
 height = 650
 c = pygame.time.Clock()
 screen = pygame.display.set_mode((width, height))
-Ball(100, 100, 50, (200, 0, 0), screen)
-Ball(200, 100, 10, (100, 0, 0), screen)
-Ball(300, 100, 20, (100, 0, 0), screen)
-Ball(400, 100, 30, (100, 0, 0), screen)
 # g = Ground(600, 2000, 50, (0, 0, 0), screen)
 click = False
 mousePos = None
 prevPos = None
-drags = [False] * len(Info.balls)
+drags = []
 screen.fill((255, 255, 255))
 
 while True:
     screen.fill((255, 255, 255))
-    screen.blit(pygame.font.SysFont("Comic Sans", 30).render("Press g to toggle gravity", 1, (0, 0, 0)), (0, 0))
+    screen.blit(pygame.font.SysFont("Comic Sans", 30).render("Press g to toggle gravity", True, (0, 0, 0)), (0, 0))
+    screen.blit(pygame.font.SysFont("Comic Sans", 30).render("Press b to add ball", True, (0, 0, 0)), (0, 30))
     mousePos = pygame.mouse.get_pos()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -37,6 +35,9 @@ while True:
                 Info.gravity = 9.8 if Info.gravity == 0 else 0
                 for i in Info.balls:
                     i.yvel = 0
+            if event.key == pygame.K_b:
+                Ball(random.randint(0, 1140), random.randint(0, 590), random.randint(5, 60), (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)), screen)
+                drags.append(False)
         if event.type == pygame.MOUSEBUTTONDOWN:
             click = True
             for i in range(len(drags)):
