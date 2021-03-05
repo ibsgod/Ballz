@@ -15,7 +15,7 @@ width = 1200
 height = 650
 c = pygame.time.Clock()
 screen = pygame.display.set_mode((width, height))
-# g = Ground(600, 2000, 50, (0, 0, 0), screen)
+Info.ground = Ground(650, 2000, 50, (0, 0, 0), screen)
 click = False
 mousePos = None
 prevPos = None
@@ -47,7 +47,6 @@ while True:
             click = False
             for i in range(len(drags)):
                 drags[i] = False
-    # g.draw()
     for i in range(len(drags)):
         if drags[i]:
             Info.balls[i].xvel = mousePos[0] - prevPos[0]

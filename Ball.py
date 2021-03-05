@@ -31,10 +31,11 @@ class Ball:
                 self.yvel += Info.gravity
             else:
                 self.yvel = min(self.yvel, 0)
-                if self.xvel != 0:
-                    self.xvel -= self.xvel / abs(self.xvel)
-                    if abs(self.xvel) < 1:
-                        self.xvel = 0
+                # friction
+                # if self.xvel != 0:
+                #     self.xvel -= self.xvel / abs(self.xvel)
+                #     if abs(self.xvel) < 1:
+                #         self.xvel = 0
         self.y += self.yvel
         self.x += self.xvel
         # self.y = max(0, min(self.y, Info.ground.y - self.size * 2))
